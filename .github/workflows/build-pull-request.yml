@@ -1,0 +1,56 @@
+# This workflow builds the game every time a PR is opened.
+# It will fail the build if it fails to compile
+# And also triggers a separate workflow to deploy a preview copy of the build
+# (which needs to be a separate run for security reasons.
+# see https://securitylab.github.com/research/github-actions-preventing-pwn-requests/ for context)
+# Lovingly adapted from: https://github.com/a-little-org-called-mario/a-little-game-called-mario/blob/main/.github/workflows/build-pull-request.yml
+
+name: Build PR
+
+on:
+  pull_request:
+    paths-ignore: # do not build for game-irrelvant changes
+      - '.**'
+      - 'LICENSE'
+      - 'ACKNOWLEDGEMENTS'
+      - '**.md'
+
+jobs:
+  build_game:
+    if: ${{ (github.event.action == 'synchronize' && github.event.label.name != 'skip preview') || github.event.action != 'synchronize' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout latest code
+        uses: actions/checkout@v2.3.1
+      - name: export with Godot Engine
+        uses: firebelley/godot-export@v5.1.0
+        with:
+          create_release: false
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.0.2/Godot_v4.0.2-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.0.2/Godot_v4.0.2-stable_export_templates.tpz
+          relative_export_path: ./
+          relative_project_path: ./
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # The next workflow needs access to the PR number to comment on it
+      # This is the best way we have to thread that through, sigh.
+      # Shoving it into web lets us upload a single artifact instead of juggling 2
+      - name: Save PR metadata
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_SENDER: ${{ github.event.sender.login }}
+          PR_ACTION: ${{ github.event.action }}
+        run: |
+          ls
+          echo $PR_NUMBER > ./web/pr_number
+          echo $PR_TITLE > ./web/pr_title
+          echo $PR_SENDER > ./web/pr_sender
+          echo $PR_ACTION > ./web/pr_action
+          cat netlify.toml > ./web/netlify.toml
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: pr
+          path: web
