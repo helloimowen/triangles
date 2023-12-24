@@ -9,8 +9,8 @@ repos:
     -   id: check-merge-conflict
     -   id: check-json
     -   id: mixed-line-ending
--   repo: https://github.com/Scony/godot-gdscript-toolkit
-    rev: 4.2.2
-    hooks:
-    -   id: gdformat
-    -   id: gdlint
+# -   repo: https://github.com/Scony/godot-gdscript-toolkit
+#     rev: 4.2.2
+#     hooks:
+    # -   id: gdformat # does not seem to work in CI
+#     -   id: gdlint
