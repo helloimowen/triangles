@@ -43,7 +43,9 @@ jobs:
           PR_SENDER: ${{ github.event.sender.login }}
           PR_ACTION: ${{ github.event.action }}
         run: |
+          ls
           mkdir -p ./HTML5
+          ls
           echo $PR_NUMBER > ./HTML5/pr_number
           echo $PR_TITLE > ./HTML5/pr_title
           echo $PR_SENDER > ./HTML5/pr_sender
