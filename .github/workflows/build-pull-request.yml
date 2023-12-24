@@ -44,25 +44,13 @@ jobs:
           PR_ACTION: ${{ github.event.action }}
         run: |
           ls
-<<<<<<< HEAD
-          echo $PR_NUMBER > ./Web/pr_number
-          echo $PR_TITLE > ./Web/pr_title
-          echo $PR_SENDER > ./Web/pr_sender
-          echo $PR_ACTION > ./Web/pr_action
-          cat netlify.toml > ./Web/netlify.toml
-=======
           echo $PR_NUMBER > web_build/pr_number
           echo $PR_TITLE > web_build/pr_title
           echo $PR_SENDER > web_build/pr_sender
           echo $PR_ACTION > web_build/pr_action
           cat netlify.toml > web_build/netlify.toml
->>>>>>> b784525 (modify actions)
 
       - uses: actions/upload-artifact@v3
         with:
           name: pr
-<<<<<<< HEAD
           path: Web
-=======
-          path: web_build
->>>>>>> b784525 (modify actions)
