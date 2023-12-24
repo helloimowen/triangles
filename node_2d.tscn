@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://blrp13weuf08b"]
+[gd_scene load_steps=5 format=3 uid="uid://b32tno4nqwb4k"]
 
 [ext_resource type="Script" path="res://makeTri.gd" id="1_3kmqo"]
 [ext_resource type="Script" path="res://instructionsButton.gd" id="2_ey6n6"]
@@ -106,6 +106,7 @@ one_shot = true
 [node name="ScrollContainer" type="ScrollContainer" parent="ColorRect"]
 visible = false
 custom_minimum_size = Vector2(980, 523)
+layout_mode = 0
 offset_left = 86.0
 offset_top = 63.0
 offset_right = 1066.0
@@ -130,6 +131,7 @@ offset_bottom = 665.0
 color = Color(1, 1, 1, 0.392157)
 
 [node name="OutSide" type="ColorRect" parent="ColorRect/TriDuplicator"]
+layout_mode = 0
 offset_left = 155.0
 offset_right = 255.0
 offset_bottom = 128.0
@@ -144,6 +146,7 @@ offset_bottom = 128.0
 text = "Out"
 
 [node name="InSide" type="ColorRect" parent="ColorRect/TriDuplicator"]
+layout_mode = 0
 offset_right = 100.0
 offset_bottom = 128.0
 color = Color(1, 1, 1, 0.392157)
@@ -155,6 +158,7 @@ position = Vector2(50, 64)
 shape = SubResource("RectangleShape2D_jtiar")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/TriDuplicator/InSide"]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 105.0
 offset_right = 62.0
@@ -171,6 +175,7 @@ theme_override_font_sizes/font_size = 12
 text = "duplicate!"
 
 [node name="Close" type="Button" parent="ColorRect/TriDuplicator"]
+layout_mode = 0
 offset_left = 117.0
 offset_right = 139.0
 offset_bottom = 25.0
