@@ -1,0 +1,16 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+    -   id: check-case-conflict
+    -   id: check-merge-conflict
+    -   id: check-json
+    -   id: mixed-line-ending
+-   repo: https://github.com/Scony/godot-gdscript-toolkit
+    rev: 4.0.1
+    hooks:
+    -   id: gdformat
+    -   id: gdlint
