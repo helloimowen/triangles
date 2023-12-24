@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=3 uid="uid://blrp13weuf08b"]
+
+[ext_resource type="Script" path="res://makeTri.gd" id="1_3kmqo"]
+[ext_resource type="Script" path="res://instructionsButton.gd" id="2_ey6n6"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_3kmqo")
+metadata/_edit_vertical_guides_ = [32.0]
+metadata/_edit_horizontal_guides_ = [32.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 7680.0
+offset_bottom = 4320.0
+mouse_filter = 2
+color = Color(0.0235294, 0.0235294, 0.0235294, 1)
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="ColorRect"]
+layout_mode = 0
+offset_left = 1066.0
+offset_top = 11.0
+offset_right = 1142.0
+offset_bottom = 84.0
+color = Color(0.721569, 0, 0.568627, 1)
+
+[node name="Button" type="Button" parent="ColorRect"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 87.0
+offset_bottom = 63.0
+toggle_mode = true
+text = "what?"
+script = ExtResource("2_ey6n6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/Button"]
+visible = false
+layout_mode = 0
+offset_top = 31.0
+offset_right = 1133.0
+offset_bottom = 635.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "Q Creates a Triangle.
+R Clears All Triangles.
+Left Click drags Triangles.
+Right Click deletes Triangles.
+Color picker to the upper right."
+
+[node name="Button" type="Button" parent="ColorRect/Button/RichTextLabel"]
+layout_mode = 0
+offset_top = 255.0
+offset_right = 108.0
+offset_bottom = 286.0
+toggle_mode = true
+text = "I don't get it?"
+script = ExtResource("2_ey6n6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/Button/RichTextLabel/Button"]
+visible = false
+layout_mode = 0
+offset_top = 50.0
+offset_right = 655.0
+offset_bottom = 226.0
+theme_override_font_sizes/normal_font_size = 32
+text = "You know legos?"
+
+[node name="Button" type="Button" parent="ColorRect/Button/RichTextLabel/Button/RichTextLabel"]
+layout_mode = 0
+offset_top = 67.0
+offset_right = 54.0
+offset_bottom = 98.0
+toggle_mode = true
+text = "Yeah?"
+script = ExtResource("2_ey6n6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/Button/RichTextLabel/Button/RichTextLabel/Button"]
+visible = false
+layout_mode = 0
+offset_top = 88.0
+offset_right = 110.0
+offset_bottom = 128.0
+mouse_filter = 2
+text = "It's like legos."
+
+[connection signal="toggled" from="ColorRect/Button" to="ColorRect/Button" method="_reveal_instructions"]
+[connection signal="toggled" from="ColorRect/Button/RichTextLabel/Button" to="ColorRect/Button/RichTextLabel/Button" method="_reveal_instructions"]
+[connection signal="toggled" from="ColorRect/Button/RichTextLabel/Button/RichTextLabel/Button" to="ColorRect/Button/RichTextLabel/Button/RichTextLabel/Button" method="_reveal_instructions"]

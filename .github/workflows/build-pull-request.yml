@@ -26,8 +26,8 @@ jobs:
         uses: firebelley/godot-export@v5.1.0
         with:
           create_release: false
-          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.0.2/Godot_v4.0.2-stable_linux.x86_64.zip
-          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.0.2/Godot_v4.0.2-stable_export_templates.tpz
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_export_templates.tpz
           relative_export_path: ./
           relative_project_path: ./
         env:
@@ -44,13 +44,13 @@ jobs:
           PR_ACTION: ${{ github.event.action }}
         run: |
           ls
-          echo $PR_NUMBER > ./web/pr_number
-          echo $PR_TITLE > ./web/pr_title
-          echo $PR_SENDER > ./web/pr_sender
-          echo $PR_ACTION > ./web/pr_action
-          cat netlify.toml > ./web/netlify.toml
+          echo $PR_NUMBER > ./Web/pr_number
+          echo $PR_TITLE > ./Web/pr_title
+          echo $PR_SENDER > ./Web/pr_sender
+          echo $PR_ACTION > ./Web/pr_action
+          cat netlify.toml > ./Web/netlify.toml
 
       - uses: actions/upload-artifact@v3
         with:
           name: pr
-          path: web
+          path: Web
