@@ -2,9 +2,11 @@
 
 A little app about triangles, made in Godot.
 
-Try it: https://pr-2--dazzling-khapse-b1dfde.netlify.app
+Try it: https://pr-3--dazzling-khapse-b1dfde.netlify.app
 
 Currently, Godot web builds do not work on Mac OS or iOS.
+
+Go to the Releases section to download builds for Mac, Linux and Windows.
 
 ## Example Images:
 

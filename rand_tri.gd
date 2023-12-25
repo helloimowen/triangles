@@ -2,7 +2,6 @@ extends Polygon2D
 
 const MAX_TRI_SIZE = 256
 const TRI_STARTING_POINT = [Vector2(0, 0), Vector2(15, 25), Vector2(-15, 25)]
-const LERP_SPEED = 0.9
 const MUTE_COLORS = Color(0.9, 0.9, 0.9, 1)
 
 var mod_color = true
