@@ -22,10 +22,12 @@ jobs:
     steps:
       - name: checkout latest code
         uses: actions/checkout@v2.3.1
+      - name: rename export presets # Use web export presets.
+        run: |
+          mv export_presets_web.cfg export_presets.cfg
       - name: export with Godot Engine
         uses: firebelley/godot-export@v5.1.0
         with:
-          create_release: false
           godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_linux.x86_64.zip
           godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_export_templates.tpz
           relative_export_path: ./
