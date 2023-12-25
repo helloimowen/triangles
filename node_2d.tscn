@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b32tno4nqwb4k"]
+[gd_scene load_steps=7 format=3 uid="uid://b32tno4nqwb4k"]
 
 [ext_resource type="Script" path="res://makeTri.gd" id="1_3kmqo"]
 [ext_resource type="Script" path="res://instructionsButton.gd" id="2_ey6n6"]
 [ext_resource type="Script" path="res://Close.gd" id="3_6l61x"]
+[ext_resource type="Script" path="res://Duplicate_Tri.gd" id="4_ivnqo"]
+[ext_resource type="Script" path="res://ToggleDuplicator.gd" id="5_xp1f5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jtiar"]
 size = Vector2(100, 128)
@@ -104,7 +106,7 @@ text = "Image Saved :^)"
 wait_time = 3.0
 one_shot = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect"]
+[node name="SaveFiles" type="ScrollContainer" parent="ColorRect"]
 visible = false
 custom_minimum_size = Vector2(980, 523)
 layout_mode = 0
@@ -113,10 +115,10 @@ offset_top = 63.0
 offset_right = 1066.0
 offset_bottom = 586.0
 
-[node name="SavedFiles" type="VBoxContainer" parent="ColorRect/ScrollContainer"]
+[node name="List" type="VBoxContainer" parent="ColorRect/SaveFiles"]
 layout_mode = 2
 
-[node name="Close" type="Button" parent="ColorRect/ScrollContainer/SavedFiles"]
+[node name="Close" type="Button" parent="ColorRect/SaveFiles/List"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "X"
@@ -125,17 +127,19 @@ script = ExtResource("3_6l61x")
 [node name="TriDuplicator" type="ColorRect" parent="ColorRect"]
 visible = false
 layout_mode = 0
-offset_left = 477.0
-offset_top = 537.0
-offset_right = 733.0
-offset_bottom = 665.0
+offset_left = 392.0
+offset_top = 65.0
+offset_right = 669.0
+offset_bottom = 193.0
+mouse_filter = 2
 color = Color(1, 1, 1, 0.392157)
 
 [node name="OutSide" type="ColorRect" parent="ColorRect/TriDuplicator"]
 layout_mode = 0
-offset_left = 155.0
-offset_right = 255.0
+offset_left = 177.0
+offset_right = 277.0
 offset_bottom = 128.0
+mouse_filter = 2
 color = Color(1, 1, 1, 0.392157)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/TriDuplicator/OutSide"]
@@ -144,12 +148,14 @@ offset_left = 32.0
 offset_top = 104.0
 offset_right = 66.0
 offset_bottom = 128.0
+mouse_filter = 2
 text = "Out"
 
 [node name="InSide" type="ColorRect" parent="ColorRect/TriDuplicator"]
 layout_mode = 0
 offset_right = 100.0
 offset_bottom = 128.0
+mouse_filter = 2
 color = Color(1, 1, 1, 0.392157)
 
 [node name="Area2D" type="Area2D" parent="ColorRect/TriDuplicator/InSide"]
@@ -164,26 +170,33 @@ offset_left = 40.0
 offset_top = 105.0
 offset_right = 62.0
 offset_bottom = 129.0
+mouse_filter = 2
 text = "In"
 
 [node name="Duplicate" type="Button" parent="ColorRect/TriDuplicator"]
 layout_mode = 0
-offset_left = 93.0
-offset_top = 102.0
-offset_right = 159.0
-offset_bottom = 127.0
-theme_override_font_sizes/font_size = 12
+offset_left = 101.0
+offset_top = 98.0
+offset_right = 176.0
+offset_bottom = 126.0
+theme_override_font_sizes/font_size = 14
 text = "duplicate!"
+script = ExtResource("4_ivnqo")
 
-[node name="Close" type="Button" parent="ColorRect/TriDuplicator"]
+[node name="OpenDuplicator" type="Button" parent="ColorRect"]
 layout_mode = 0
-offset_left = 117.0
-offset_right = 139.0
-offset_bottom = 25.0
-theme_override_font_sizes/font_size = 12
-text = "X"
+offset_left = 488.0
+offset_top = 34.0
+offset_right = 576.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 16
+toggle_mode = true
+text = "duplicator?"
+script = ExtResource("5_xp1f5")
 
 [connection signal="toggled" from="ColorRect/Button" to="ColorRect/Button" method="_reveal_instructions"]
 [connection signal="toggled" from="ColorRect/Button/RichTextLabel/Button" to="ColorRect/Button/RichTextLabel/Button" method="_reveal_instructions"]
 [connection signal="toggled" from="ColorRect/Button/RichTextLabel/Button/RichTextLabel/Button" to="ColorRect/Button/RichTextLabel/Button/RichTextLabel/Button" method="_reveal_instructions"]
-[connection signal="pressed" from="ColorRect/ScrollContainer/SavedFiles/Close" to="ColorRect/ScrollContainer/SavedFiles/Close" method="_on_Button_pressed"]
+[connection signal="pressed" from="ColorRect/SaveFiles/List/Close" to="ColorRect/SaveFiles/List/Close" method="_on_Button_pressed"]
+[connection signal="pressed" from="ColorRect/TriDuplicator/Duplicate" to="ColorRect/TriDuplicator/Duplicate" method="duplicate_poly_on_press"]
+[connection signal="toggled" from="ColorRect/OpenDuplicator" to="ColorRect/OpenDuplicator" method="on_button_toggle"]
