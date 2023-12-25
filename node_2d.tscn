@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://blrp13weuf08b"]
+[gd_scene load_steps=5 format=3 uid="uid://b32tno4nqwb4k"]
 
 [ext_resource type="Script" path="res://makeTri.gd" id="1_3kmqo"]
 [ext_resource type="Script" path="res://instructionsButton.gd" id="2_ey6n6"]
+[ext_resource type="Script" path="res://Close.gd" id="3_6l61x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jtiar"]
+size = Vector2(100, 128)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_3kmqo")
@@ -9,8 +13,9 @@ metadata/_edit_vertical_guides_ = [32.0]
 metadata/_edit_horizontal_guides_ = [32.0]
 
 [node name="ColorRect" type="ColorRect" parent="."]
+offset_top = -2.0
 offset_right = 7680.0
-offset_bottom = 4320.0
+offset_bottom = 4318.0
 mouse_filter = 2
 color = Color(0.0235294, 0.0235294, 0.0235294, 1)
 
@@ -20,7 +25,7 @@ offset_left = 1066.0
 offset_top = 11.0
 offset_right = 1142.0
 offset_bottom = 84.0
-color = Color(0.721569, 0, 0.568627, 1)
+color = Color(0, 1, 0.235294, 0.709804)
 
 [node name="Button" type="Button" parent="ColorRect"]
 layout_mode = 0
@@ -39,18 +44,20 @@ offset_top = 31.0
 offset_right = 1133.0
 offset_bottom = 635.0
 mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 30
 text = "Q Creates a Triangle.
 R Clears All Triangles.
 Left Click drags Triangles.
 Right Click deletes Triangles.
-Color picker to the upper right."
+Color picker to the upper right.
+E Saves a Screenshot.
+S to Save, L to Load."
 
 [node name="Button" type="Button" parent="ColorRect/Button/RichTextLabel"]
 layout_mode = 0
-offset_top = 255.0
+offset_top = 318.0
 offset_right = 108.0
-offset_bottom = 286.0
+offset_bottom = 349.0
 toggle_mode = true
 text = "I don't get it?"
 script = ExtResource("2_ey6n6")
@@ -82,6 +89,100 @@ offset_bottom = 128.0
 mouse_filter = 2
 text = "It's like legos."
 
+[node name="ImageSaved" type="RichTextLabel" parent="ColorRect"]
+visible = false
+layout_mode = 0
+offset_left = 87.0
+offset_top = 603.0
+offset_right = 1107.0
+offset_bottom = 635.0
+mouse_filter = 2
+text = "Image Saved :^)"
+
+[node name="Timer" type="Timer" parent="ColorRect/ImageSaved"]
+wait_time = 3.0
+one_shot = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect"]
+visible = false
+custom_minimum_size = Vector2(980, 523)
+layout_mode = 0
+offset_left = 86.0
+offset_top = 63.0
+offset_right = 1066.0
+offset_bottom = 586.0
+
+[node name="SavedFiles" type="VBoxContainer" parent="ColorRect/ScrollContainer"]
+layout_mode = 2
+
+[node name="Close" type="Button" parent="ColorRect/ScrollContainer/SavedFiles"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "X"
+script = ExtResource("3_6l61x")
+
+[node name="TriDuplicator" type="ColorRect" parent="ColorRect"]
+visible = false
+layout_mode = 0
+offset_left = 477.0
+offset_top = 537.0
+offset_right = 733.0
+offset_bottom = 665.0
+color = Color(1, 1, 1, 0.392157)
+
+[node name="OutSide" type="ColorRect" parent="ColorRect/TriDuplicator"]
+layout_mode = 0
+offset_left = 155.0
+offset_right = 255.0
+offset_bottom = 128.0
+color = Color(1, 1, 1, 0.392157)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/TriDuplicator/OutSide"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 104.0
+offset_right = 66.0
+offset_bottom = 128.0
+text = "Out"
+
+[node name="InSide" type="ColorRect" parent="ColorRect/TriDuplicator"]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 128.0
+color = Color(1, 1, 1, 0.392157)
+
+[node name="Area2D" type="Area2D" parent="ColorRect/TriDuplicator/InSide"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/TriDuplicator/InSide/Area2D"]
+position = Vector2(50, 64)
+shape = SubResource("RectangleShape2D_jtiar")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/TriDuplicator/InSide"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 105.0
+offset_right = 62.0
+offset_bottom = 129.0
+text = "In"
+
+[node name="Duplicate" type="Button" parent="ColorRect/TriDuplicator"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 102.0
+offset_right = 159.0
+offset_bottom = 127.0
+theme_override_font_sizes/font_size = 12
+text = "duplicate!"
+
+[node name="Close" type="Button" parent="ColorRect/TriDuplicator"]
+layout_mode = 0
+offset_left = 117.0
+offset_right = 139.0
+offset_bottom = 25.0
+theme_override_font_sizes/font_size = 12
+text = "X"
+
 [connection signal="toggled" from="ColorRect/Button" to="ColorRect/Button" method="_reveal_instructions"]
 [connection signal="toggled" from="ColorRect/Button/RichTextLabel/Button" to="ColorRect/Button/RichTextLabel/Button" method="_reveal_instructions"]
 [connection signal="toggled" from="ColorRect/Button/RichTextLabel/Button/RichTextLabel/Button" to="ColorRect/Button/RichTextLabel/Button/RichTextLabel/Button" method="_reveal_instructions"]
+[connection signal="pressed" from="ColorRect/ScrollContainer/SavedFiles/Close" to="ColorRect/ScrollContainer/SavedFiles/Close" method="_on_Button_pressed"]
