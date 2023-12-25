@@ -1,6 +1,6 @@
 extends Area2D
 
-const LERP_SPEED = 3
+const LERP_SPEED = 30
 
 var selected = false
 
