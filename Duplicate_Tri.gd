@@ -9,7 +9,7 @@ func get_parent_width():
 
 func duplicate_poly_on_press():
 	var tris = get_parent().get_node("InSide").get_node("Area2D").get_overlapping_areas()
-	var base = get_parent().get_parent()
+	var base = get_parent().get_parent().get_parent() # lol
 	for tri in tris:
 		var new_poly = tri.get_parent().duplicate()
 		new_poly.position = (
