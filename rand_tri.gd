@@ -6,13 +6,16 @@ const MUTE_COLORS = Color(0.9, 0.9, 0.9, 1)
 
 var mod_color = true
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if mod_color:
 		set_color_from_color_picker()
 
+
 func set_mod_color(do_mod_color) -> void:
 	mod_color = do_mod_color
+
 
 func get_tri_area() -> float:
 	var p1 = polygon[0]
@@ -37,7 +40,6 @@ func init_tri() -> void:
 	# add collision to existing collisionPolygon2D
 
 	get_child(0).get_child(0).set("polygon", [p1, p2, p3])
-
 
 
 func get_color_picker_value() -> Color:
